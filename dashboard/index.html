@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Template Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+<header>
+  <nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-header">
+      <a href="#/index" class="navbar-brand">Controle de Equipamentos</a>
+      <button type="button" class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">Menu</button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li role="presentation" class="active"><a href="#/categoria">Categoria</a></li>
+        <li role="presentation"><a href="#/equipamento">Equipamento</a></li>
+        <li role="presentation"><a href="#/estado">Estado do Equipamento</a></li>
+        <li role="presentation"><a href="#/funcionario">Funcionário</a></li>
+        <li role="presentation"><a href="#/manutencao">Manutenção</a></li>
+        <li role="presentation"><a href="#/marca">Marca</a></li>
+        <li role="presentation"><a href="#/requisito">Requisito</a></li>
+        <li role="presentation" ><a href="#/setor">Setor</a></li>
+        <li role="presentation" ><a href="#/status">Status</a></li>
+        <li role="presentation"><a href="#/usuario">Usuário</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        
+        <div class="col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Visão geral</a></li>
+            <li><a href="#">Sei la </a></li>
+            <li><a href="#">Sei la 2</a></li>
+            <li><a href="#">Sei la 3</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Categorias</h1>
+
+          <div class="row placeholders">
+            <div class="cold-md-12 placeholder">      
+              <p ng-show="mensagem.length" class="alert alert-success">{{mensagem}}</p>
+              <input ng-model="filtro" type="text" class="form-control"  />
+            </div>
+          </div>
+          <form novalidate name="formulario" class="row" ng-submit="submeter()">  
+            <fieldset>
+              <legend>Informações da categoria</legend>
+              <div class="form-group">
+                <label for="categoria">Categoria:</label>
+                <div class="input-group">
+                  <span class="input-group-btn"><button ng-click="limpar()" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+                  </span> <input ng-model="categoria.nome" ng-maxlength="100" name="categoria" id="categoria" class="form-control" placeholder="Adicione uma nova categoria ou altere os dados da categoria selecionada." required />
+                </div>
+              </div>
+              <span ng-show="formulario.$submited && formulario.nome.$error.required" class="form-control alert-danger">
+                Nome  da Categoria obrigatório !!!
+              </span>
+              <span ng-show="formulario.nome.$error.maxlength" class="form-control alert-danger">
+                O Nome da Categoria deve ter no máximo 100 caracteres !!!
+              </span>
+              <button type="submit" class="btn btn-primary btn-block" ng-disabled="formulario.$invalid">
+                <span class="glyphicon glyphicon-floppy-disk"></span>
+                Salvar
+              </button>
+            </fieldset>
+          </form>
+
+          <h2 class="sub-header">Lista de categorias</h2>
+          
+          <div class="table-responsive"> 
+            <table class="table table-striped">
+              <thead>
+               <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Ação</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="categoria in categorias| filter:filtro">
+                <td>{{categoria.id}}</td>
+                <td>{{categoria.nome}}</td>       
+                <td><button ng-click="editar(categoria)" class="btn"><span class="glyphicon glyphicon-edit"></span></button></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        
+        </div>
+      
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+  </body>
+</html>
